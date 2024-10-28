@@ -5,6 +5,7 @@ import AuthService from "../services/auth.service";
 const LoginComponent = (props) => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  let [message, setMessage] = useState("");
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -17,15 +18,16 @@ const LoginComponent = (props) => {
   const handleLogin = async () => {
     try {
       let response = await AuthService.login(email, password);
-      console.log(response);
+      localStorage.setItem("user", JSON.stringify(response.data));
     } catch (e) {
-      console.log(e);
+      setMessage(e.response.data);
     }
   };
 
   return (
     <div style={{ padding: "3rem" }} className="col-md-12">
       <div>
+        {message && <div className="alert alert-danger">{message}</div>}
         <div className="form-group">
           <label htmlFor="username">電子信箱：</label>
           <input

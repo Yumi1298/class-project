@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import AuthService from "../services/auth.service";
 
-const ProfileComponent = () => {
-  let [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    setCurrentUser(AuthService.getCurrentUser());
-  }, []);
-
+const ProfileComponent = ({ currentUser, setCurrentUser }) => {
   return (
     <div style={{ padding: "3rem" }}>
       {!currentUser && <div>在獲取您的個人資料之前，您必須先登錄。</div>}

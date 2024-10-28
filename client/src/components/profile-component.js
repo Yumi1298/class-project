@@ -1,5 +1,12 @@
-const ProfileComponent = (props) => {
-  let { currentUser, setCurrentUser } = props;
+import { useState, useEffect } from "react";
+import AuthService from "../services/auth.service";
+
+const ProfileComponent = () => {
+  let [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    setCurrentUser(AuthService.getCurrentUser());
+  }, []);
 
   return (
     <div style={{ padding: "3rem" }}>

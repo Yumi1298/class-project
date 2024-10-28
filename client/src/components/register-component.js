@@ -8,6 +8,7 @@ const RegisterComponent = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [role, setRole] = useState("");
+  let [message, setMessage] = useState("");
 
   const handleChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -32,13 +33,15 @@ const RegisterComponent = () => {
         navigate("/login");
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
+        setMessage(e.response.data);
       });
   };
 
   return (
     <div style={{ padding: "3rem" }} className="col-md-12">
       <div>
+        {message && <div className="alert alert-danger">{message}</div>}
         <div>
           <label htmlFor="username">用戶名稱:</label>
           <input
@@ -72,7 +75,7 @@ const RegisterComponent = () => {
         <br />
         <div className="form-group">
           <label htmlFor="password">身份：</label>
-          {/* <div class="form-check">
+          <div class="form-check">
             <input
               class="form-check-input"
               type="radio"
@@ -96,14 +99,14 @@ const RegisterComponent = () => {
             <label class="form-check-label" for="role">
               instructor
             </label>
-          </div> */}
-          <input
+          </div>
+          {/* <input
             type="text"
             onChange={handleChangeRole}
             className="form-control"
             placeholder="只能填入student或是instructor這兩個選項其一"
             name="role"
-          />
+          /> */}
         </div>
         <br />
         <button onClick={handleRegister} className="btn btn-primary">

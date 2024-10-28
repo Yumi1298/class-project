@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AuthService from "../services/auth.service";
 
 const NavComponent = () => {
+  const handleLogout = () => {
+    AuthService.logout(); // 清空 local storage
+    window.alert("登出成功!現在您會被導向首頁。");
+  };
   return (
     <div>
       <nav>
@@ -40,7 +45,7 @@ const NavComponent = () => {
                 </li>
 
                 <li className="nav-item">
-                  <Link /*onClick={handleLogout} */ className="nav-link" to="/">
+                  <Link onClick={handleLogout} className="nav-link" to="/">
                     登出
                   </Link>
                 </li>

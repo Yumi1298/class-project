@@ -57,11 +57,26 @@ class CourseService {
     } else {
       token = "";
     }
-
     return axios.get(API_URL + "/findByName/" + name, {
       headers: { Authorization: token },
     });
   }
-}
 
+  // 讓學生透過課程id來註冊新課程
+  enroll(_id) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+    return axios.post(
+      API_URL + "/enroll/" + _id,
+      {},
+      {
+        headers: { Authorization: token },
+      }
+    );
+  }
+}
 export default new CourseService();

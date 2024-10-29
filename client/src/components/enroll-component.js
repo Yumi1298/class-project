@@ -25,6 +25,17 @@ const EnrollComponent = ({ currentUser, setCurrentUser }) => {
       });
   };
 
+  const handleEnroll = (e) => {
+    CourseService.enroll(e.target.id)
+      .then(() => {
+        window.alert("課程註冊成功!!重新導向到課程頁面。");
+        navigate("/course");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <div style={{ padding: "3rem" }}>
       {!currentUser && (
@@ -64,12 +75,14 @@ const EnrollComponent = ({ currentUser, setCurrentUser }) => {
               <div className="card-body">
                 <h5 className="card-title">課程名稱：{course.title}</h5>
                 <p className="card-text">{course.description}</p>
+                <p>講師: {course.instructor.username}</p>
                 <p>價格: {course.price}</p>
                 <p>目前的學生人數: {course.students.length}</p>
                 <a
                   href="#"
                   className="card-text btn btn-primary"
                   id={course._id}
+                  onClick={handleEnroll}
                 >
                   註冊課程
                 </a>

@@ -30,7 +30,7 @@ router.get("/instructor/:_instructor_id", async (req, res) => {
 });
 
 // 用學生id尋找註冊過的課程
-router.get("/student/:student_id", async (req, res) => {
+router.get("/student/:_student_id", async (req, res) => {
   let { _student_id } = req.params;
   let coursesFound = await Course.find({ students: _student_id })
     .populate("instructor", ["username", "email"])

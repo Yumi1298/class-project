@@ -22,8 +22,10 @@ export default function CourseComponent({ currentUser, setCurrentUser }) {
             console.log(e);
           });
       } else if (currentUser.user.role == "student") {
+        console.log("學生。。。");
         CourseService.getEnrolledCourses(_id)
           .then((data) => {
+            console.log(data);
             setCourseData(data.data);
           })
           .catch((e) => {

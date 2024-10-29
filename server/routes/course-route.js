@@ -94,10 +94,14 @@ router.post("/", async (req, res) => {
 // 讓學生透過課程id來註冊新課程
 router.post("/enroll/:_id", async (req, res) => {
   let { _id } = req.params;
-  let course = await Course.findOne({ _id });
-  course.students.push(req.user._id);
-  await course.save();
-  res.send("註冊完成");
+  try {
+    let course = await Course.findOne({ _id }).exec();
+    course.students.push(req.user._id);
+    await course.save();
+    return res.send("註冊完成");
+  } catch (e) {
+    return res.send(e);
+  }
 });
 
 // 更改課程

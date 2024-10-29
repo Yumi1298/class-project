@@ -42,7 +42,7 @@ router.get("/student/:student_id", async (req, res) => {
 router.get("/findByName/:name", async (req, res) => {
   let { name } = req.params;
   try {
-    let courseFound = await Course.findOne({ title: name })
+    let courseFound = await Course.find({ title: name })
       .populate("instructor", ["email", "username"])
       .exec();
     return res.send(courseFound);

@@ -16,7 +16,7 @@ export default function CourseComponent({ currentUser, setCurrentUser }) {
       if (currentUser.user.role == "instructor") {
         CourseService.get(_id)
           .then((data) => {
-            console.log(data);
+            setCourseData(data.data);
           })
           .catch((e) => {
             console.log(e);
@@ -24,7 +24,7 @@ export default function CourseComponent({ currentUser, setCurrentUser }) {
       } else if (currentUser.user.role == "student") {
         CourseService.getEnrolledCourses(_id)
           .then((data) => {
-            console.log(data);
+            setCourseData(data.data);
           })
           .catch((e) => {
             console.log(e);
@@ -54,6 +54,29 @@ export default function CourseComponent({ currentUser, setCurrentUser }) {
       {currentUser && currentUser.user.role == "student" && (
         <div>
           <h1>歡迎來到學生的課程頁面。</h1>
+        </div>
+      )}
+
+      {currentUser && courseData && courseData.length != 0 && (
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {courseData.map((course) => {
+            return (
+              <div className="card" style={{ width: "18rem", margin: "1rem" }}>
+                <div className="card-body">
+                  <h5 className="card-title">課程名稱: {course.title}</h5>
+                  <p style={{ margin: "0.5rem 0rem" }} className="card-text">
+                    {course.description}
+                  </p>
+                  <p style={{ margin: "0.5rem 0rem" }}>
+                    學生人數: {course.students.length}
+                  </p>
+                  <p style={{ margin: "0.5rem 0rem" }}>
+                    課程價格: {course.price}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

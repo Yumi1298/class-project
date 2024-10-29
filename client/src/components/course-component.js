@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import CourseService from "../services/course.service";
 
 export default function CourseComponent({ currentUser, setCurrentUser }) {
   const navigate = useNavigate();

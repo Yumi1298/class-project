@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CourseService from "../services/course.service";
 
@@ -7,6 +7,24 @@ export default function CourseComponent({ currentUser, setCurrentUser }) {
   const handleTakeToLogin = () => {
     navigate("/login");
   };
+
+  const [courseData, setCourseData] = useState(null);
+  useEffect(() => {
+    let _id;
+    if (currentUser) {
+      _id = currentUser.user._id;
+      if (currentUser.user.role == "instructor") {
+        CourseService.get(_id)
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+    }
+  }, []);
+
   return (
     <div style={{ padding: "3rem" }}>
       {!currentUser && (

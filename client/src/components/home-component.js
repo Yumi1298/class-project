@@ -9,8 +9,7 @@ const HomeComponent = () => {
             <h1 className="display-5 fw-bold">學習系統</h1>
             <p className="col-md-8 fs-4">
               本系統使用 React.js 作為前端框架，Node.js、MongoDB
-              作為後端服務器。這種項目稱為 MERN
-              項目，它是創建現代網站的最流行的方式之一。
+              作為後端服務器。這種項目被稱為 MERN 項目。
             </p>
             <button className="btn btn-primary btn-lg" type="button">
               看看它怎麼運作。
